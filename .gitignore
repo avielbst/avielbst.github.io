@@ -1,0 +1,9 @@
+# Claude Code internal settings
+.claude/
+
+# Playwright test artifacts
+.playwright-mcp/
+
+# Internal AI planning/session notes
+previous_thoughts.md
+floofy-wishing-horizon.md
