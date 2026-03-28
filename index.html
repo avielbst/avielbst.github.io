@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviel Ben Siman Tov | Data Science Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --purple:      #9822E0;
+            --purple-mid:  #6B10A8;
+            --purple-dark: #2d0060;
+            --purple-glow: rgba(152, 34, 224, 0.45);
+            --green:       #53FA43;
+            --green-glow:  rgba(83, 250, 67, 0.4);
+            --orange:      #FFB800;
+            --orange-glow: rgba(255, 184, 0, 0.4);
+            --bg-0:        #03000C;
+            --bg-1:        #07001E;
+            --bg-2:        #0C002E;
+            --text:        #F5F2FF;
+            --text-dim:    #C4BADF;
+            --border:      rgba(152, 34, 224, 0.25);
+            --border-hi:   rgba(152, 34, 224, 0.7);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-0);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: var(--bg-0); }
+        ::-webkit-scrollbar-thumb { background: var(--purple); }
+
+        /* ===== SCANLINE OVERLAY ===== */
+        body::after {
+            content: ''; position: fixed; inset: 0; z-index: 9998;
+            pointer-events: none;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px,
+                rgba(0,0,0,.05) 2px, rgba(0,0,0,.05) 4px);
+        }
+
+        /* ===== CREEP BACKGROUND ===== */
+        #creep-layer {
+            position: fixed; inset: 0; z-index: 0;
+            pointer-events: none;
+            filter: url(#goo);
+            opacity: .92;
+        }
+        #creep-cvs  { position: absolute; inset: 0; }
+        #vein-cvs   { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1.1rem 3rem;
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(3,0,12,.9);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .95rem; font-weight: 700;
+            color: var(--green); text-decoration: none;
+            letter-spacing: .22em;
+            text-shadow: 0 0 20px var(--green-glow);
+        }
+        .nav-logo em { color: var(--purple); font-style: normal; }
+        .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+        .nav-links a {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: .84rem; font-weight: 500;
+            color: var(--text-dim); text-decoration: none;
+            letter-spacing: .18em; text-transform: uppercase;
+            transition: color .25s, text-shadow .25s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--green); text-shadow: 0 0 12px var(--green-glow);
+        }
+        .nav-actions { display: flex; align-items: center; gap: 1.2rem; }
+        .nav-icon { color: var(--text-dim); transition: color .25s; display: flex; }
+        .nav-icon:hover { color: var(--green); filter: drop-shadow(0 0 6px var(--green-glow)); }
+        .nav-hire {
+            padding: .55rem 1.6rem;
+            font-size: .78rem;
+            clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+        }
+
+        /* ===== SECTION BASE ===== */
+        section {
+            position: relative; z-index: 1; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .section-tag { font-size: .72rem; color: var(--purple); letter-spacing: .35em; text-transform: uppercase; margin-bottom: .9rem; opacity: .85; }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: clamp(1.8rem,4vw,3rem); font-weight: 700; letter-spacing: .06em; }
+        .section-title em { color: var(--purple); font-style: normal; text-shadow: 0 0 30px var(--purple-glow); }
+        .section-hr { width: 120px; height: 2px; background: linear-gradient(90deg, transparent, var(--purple), var(--green), var(--purple), transparent); margin: 1.4rem auto 0; box-shadow: 0 0 12px var(--purple-glow); }
+        .section-header { text-align: center; margin-bottom: 4.5rem; }
+
+        /* ===== HERO ===== */
+        #hero { padding: 7rem 2rem 4rem; overflow: hidden; }
+        #hero::before {
+            content: ''; position: absolute; inset: 0; z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34zm0 0L56 50V16L28 0z' fill='none' stroke='%239822E0' stroke-width='0.5'/%3E%3C/svg%3E");
+            opacity: .04;
+        }
+        .hero-inner { position: relative; z-index: 1; max-width: 980px; text-align: center; }
+
+        .hero-eyebrow {
+            font-size: .72rem; color: var(--green);
+            letter-spacing: .5em; text-transform: uppercase;
+            margin-bottom: 2rem;
+            clip-path: inset(0 100% 0 0);
+            animation: revealLR 1.8s steps(36) .3s forwards;
+        }
+        @keyframes revealLR { to { clip-path: inset(0 0% 0 0); } }
+
+        .hero-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.6rem, 7vw, 6rem);
+            font-weight: 900; line-height: .92; letter-spacing: -.02em;
+            color: var(--text);
+            text-shadow: 0 0 60px rgba(232,224,255,.12);
+            margin-bottom: .45em;
+            animation: fadeUp .9s .4s both;
+        }
+        .hero-title-line {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(.95rem, 2.5vw, 1.75rem);
+            font-weight: 600; letter-spacing: .14em;
+            color: var(--purple);
+            text-shadow: 0 0 40px var(--purple-glow), 0 0 80px rgba(152,34,224,.2);
+            animation: fadeUp .9s .6s both, glitch 6s 2s infinite;
+            margin-bottom: 1.8rem;
+        }
+
+        /* ── SKILLS STRIP ── */
+        .hero-skills {
+            display: flex; flex-wrap: wrap; gap: .5rem;
+            justify-content: center;
+            margin-bottom: 2.2rem;
+            animation: fadeUp .9s .75s both;
+        }
+        .hsk {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: .74rem; font-weight: 600;
+            letter-spacing: .12em; text-transform: uppercase;
+            padding: .36rem .9rem;
+            border: 1px solid rgba(83,250,67,.32);
+            color: var(--green);
+            background: rgba(83,250,67,.05);
+            backdrop-filter: blur(8px);
+            transition: all .25s;
+        }
+        .hsk:hover { background: rgba(83,250,67,.13); border-color: var(--green); box-shadow: 0 0 14px var(--green-glow); }
+        .hsk.dim {
+            color: var(--text-dim);
+            border-color: rgba(152,34,224,.28);
+            background: rgba(152,34,224,.04);
+        }
+        .hsk.dim:hover { color: var(--purple); border-color: var(--purple); background: rgba(152,34,224,.1); box-shadow: 0 0 10px var(--purple-glow); }
+
+        .hero-sub {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(.9rem, 2vw, 1.18rem); font-weight: 400;
+            color: var(--text-dim); letter-spacing: .06em; line-height: 1.7;
+            max-width: 640px; margin: 0 auto 2.8rem;
+            animation: fadeUp .9s .88s both;
+        }
+        .hero-sub em { color: var(--green); font-style: normal; }
+        .hero-sub strong { color: var(--text); }
+
+        .hero-cta { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; animation: fadeUp .9s 1s both; }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            font-family: 'Rajdhani', sans-serif; font-size: .88rem; font-weight: 600;
+            letter-spacing: .22em; text-transform: uppercase;
+            text-decoration: none; display: inline-block; padding: .85rem 2.4rem;
+            clip-path: polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+            transition: all .28s;
+        }
+        .btn-fill { background: var(--green); color: var(--bg-0); }
+        .btn-fill:hover { background: var(--orange); box-shadow: 0 0 35px var(--orange-glow); transform: translateY(-2px); }
+        .btn-outline { background: transparent; color: var(--purple); border: 1px solid var(--purple); }
+        .btn-outline:hover { background: var(--purple); color: var(--bg-0); box-shadow: 0 0 35px var(--purple-glow); transform: translateY(-2px); }
+        .btn-hire {
+            background: transparent; color: var(--orange);
+            border: 1.5px solid var(--orange);
+            animation: hireGlow 2.8s ease-in-out infinite;
+        }
+        .btn-hire:hover { background: var(--orange); color: var(--bg-0); box-shadow: 0 0 40px var(--orange-glow); transform: translateY(-2px); }
+        @keyframes hireGlow { 0%,100%{box-shadow:0 0 12px rgba(255,184,0,.3);} 50%{box-shadow:0 0 28px rgba(255,184,0,.65);} }
+
+        .scroll-cue { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: .5rem; animation: fadeUp .9s 1.4s both; }
+        .scroll-cue span { font-size: .6rem; letter-spacing: .35em; color: var(--text-dim); }
+        .scroll-line { width: 1px; height: 44px; background: linear-gradient(to bottom, var(--purple), transparent); animation: scrollPulse 2.2s ease-in-out infinite; }
+
+        /* ===== EVOLUTION CHAMBER ===== */
+        #evolution-chamber { padding: 6rem 3rem; background: linear-gradient(to bottom, transparent, rgba(12,0,46,.45), transparent); }
+        .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.6rem; max-width: 1100px; width: 100%; margin-bottom: 3.5rem; }
+        .stat-card {
+            position: relative; padding: 2.4rem 1.4rem 2rem;
+            background: rgba(7,0,30,.75); border: 1px solid var(--border);
+            clip-path: polygon(18px 0%,100% 0%,calc(100% - 18px) 100%,0% 100%);
+            text-align: center; backdrop-filter: blur(12px);
+            transition: border-color .3s, box-shadow .3s; overflow: hidden;
+        }
+        .stat-card::before { content:''; position:absolute; inset:0; background:linear-gradient(160deg,rgba(152,34,224,.07),transparent); }
+        .stat-card:hover { border-color: var(--green); box-shadow: 0 0 40px var(--green-glow), inset 0 0 24px rgba(83,250,67,.04); }
+        .stat-card:hover .stat-num { text-shadow: 0 0 30px var(--green-glow); }
+        .stat-num { font-family: 'Orbitron',sans-serif; font-size: 3.2rem; font-weight: 700; line-height: 1; color: var(--green); text-shadow: 0 0 22px var(--green-glow); margin-bottom: .5rem; }
+        .stat-num .sfx { font-size: 1.8rem; }
+        .stat-lbl { font-family: 'Rajdhani',sans-serif; font-size: .82rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-dim); }
+        .stat-sub { font-size: .62rem; color: var(--orange); opacity: .75; margin-top: .3rem; letter-spacing: .1em; }
+        .stat-bar { width: 100%; height: 2px; background: rgba(152,34,224,.15); margin-top: 1.4rem; overflow: hidden; }
+        .stat-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--purple), var(--green)); box-shadow: 0 0 8px var(--green-glow); transition: width 2s cubic-bezier(.22,1,.36,1); }
+
+        /* ── EXPERIENCE CARDS ── */
+        .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 1100px; width: 100%; }
+        .exp-card {
+            padding: 2rem 2.2rem;
+            background: rgba(7,0,30,.75); border: 1px solid var(--border);
+            border-left: 3px solid var(--purple);
+            backdrop-filter: blur(12px);
+            transition: border-color .3s, box-shadow .3s;
+        }
+        .exp-card:hover { border-left-color: var(--green); box-shadow: 0 0 30px rgba(152,34,224,.15); }
+        .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; gap: 1rem; }
+        .exp-role { font-family: 'Rajdhani',sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text); letter-spacing: .04em; }
+        .exp-company { font-size: .72rem; color: var(--green); letter-spacing: .1em; margin-top: .25rem; }
+        .exp-dates { font-family: 'Orbitron',sans-serif; font-size: .63rem; color: var(--text-dim); white-space: nowrap; padding-top: .1rem; }
+        .exp-bullets { list-style: none; }
+        .exp-bullets li { font-size: .85rem; color: var(--text-dim); padding: .28rem 0 .28rem 1.4rem; position: relative; line-height: 1.65; }
+        .exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--purple); }
+        .exp-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1.2rem; }
+        .exp-tag { font-size: .58rem; color: var(--orange); padding: .16rem .5rem; border: 1px solid rgba(255,184,0,.2); background: rgba(255,184,0,.04); letter-spacing: .08em; }
+
+        /* ===== SPAWNING POOL — EGGS ===== */
+        #spawning-pool { padding: 6rem 3rem; }
+        .eggs-hatchery { display: flex; flex-wrap: wrap; gap: 2.2rem; justify-content: center; max-width: 1200px; width: 100%; }
+
+        .egg {
+            width: 205px; height: 268px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            background: radial-gradient(ellipse at 38% 32%, rgba(95,5,165,.92) 0%, rgba(16,0,38,1) 72%);
+            border: 1.5px solid rgba(152,34,224,.42);
+            position: relative; cursor: pointer;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 3rem 1.4rem 2.2rem;
+            box-shadow: 0 0 28px rgba(152,34,224,.18), 0 6px 40px rgba(0,0,0,.55), inset 0 0 50px rgba(0,0,0,.4);
+            transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s;
+            overflow: hidden; user-select: none;
+        }
+        /* specular highlight */
+        .egg::before {
+            content: ''; position: absolute;
+            top: 14%; left: 22%; width: 38%; height: 22%;
+            background: radial-gradient(ellipse, rgba(210,160,255,.18), transparent 70%);
+            border-radius: 50%; pointer-events: none;
+        }
+        /* vein lines */
+        .egg::after {
+            content: ''; position: absolute; inset: 0;
+            background:
+                linear-gradient(128deg, transparent 42%, rgba(83,250,67,.045) 50%, transparent 58%),
+                linear-gradient(248deg, transparent 38%, rgba(83,250,67,.03) 46%, transparent 54%);
+            border-radius: inherit; pointer-events: none;
+        }
+        .egg:hover {
+            transform: translateY(-14px) scale(1.04);
+            box-shadow: 0 0 70px rgba(152,34,224,.52), 0 14px 60px rgba(0,0,0,.4), inset 0 0 30px rgba(152,34,224,.08);
+        }
+        .egg.cracking { animation: eggCrack .55s ease-in-out forwards; }
+        @keyframes eggCrack {
+            0%   { transform: translateX(0) rotate(0deg) scale(1); }
+            15%  { transform: translateX(-8px) rotate(-4deg) scale(1.02); }
+            30%  { transform: translateX(8px) rotate(4deg) scale(.98); }
+            45%  { transform: translateX(-5px) rotate(-3deg) scale(1.01); }
+            60%  { transform: translateX(5px) rotate(3deg) scale(.99); }
+            80%  { transform: translateX(-2px) rotate(-1deg) scale(1); }
+            100% { transform: translateX(0) rotate(0deg) scale(1); }
+        }
+
+        .egg-pub {
+            position: absolute; top: 1rem; left: 50%; transform: translateX(-50%);
+            font-size: .54rem; color: var(--orange); letter-spacing: .14em; text-transform: uppercase;
+            background: rgba(255,184,0,.08); border: 1px solid rgba(255,184,0,.22);
+            padding: .15rem .5rem; white-space: nowrap;
+        }
+        .egg-type {
+            font-family: 'Rajdhani',sans-serif; font-size: .6rem; font-weight: 600;
+            color: var(--purple); letter-spacing: .18em; text-transform: uppercase;
+            padding: .2rem .6rem; border: 1px solid rgba(152,34,224,.3);
+            background: rgba(152,34,224,.08);
+            margin-bottom: .9rem; position: relative; z-index: 1;
+        }
+        .egg-name {
+            font-family: 'Orbitron',sans-serif; font-size: .95rem; font-weight: 700;
+            color: var(--text); letter-spacing: .04em; line-height: 1.25;
+            margin-bottom: .7rem; position: relative; z-index: 1;
+        }
+        .egg-brief { font-size: .74rem; color: var(--text-dim); line-height: 1.6; position: relative; z-index: 1; }
+        .egg-hint { position: absolute; bottom: 1.3rem; font-size: .52rem; color: var(--green); opacity: .5; letter-spacing: .3em; text-transform: uppercase; animation: pulse 2.5s ease-in-out infinite; }
+
+        /* ===== EGG MODAL ===== */
+        #egg-modal {
+            position: fixed; inset: 0; z-index: 500;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(3,0,12,.88);
+            backdrop-filter: blur(22px);
+            opacity: 0; pointer-events: none;
+            transition: opacity .3s;
+        }
+        #egg-modal.open { opacity: 1; pointer-events: all; }
+        .modal-box {
+            position: relative;
+            width: min(820px,93vw); max-height: 86vh; overflow-y: auto;
+            background: rgba(6,0,20,.97);
+            border: 1px solid rgba(152,34,224,.42);
+            padding: 3rem;
+            box-shadow: 0 0 80px rgba(152,34,224,.28), 0 0 200px rgba(152,34,224,.08);
+            transform: scale(.88);
+            transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+        }
+        #egg-modal.open .modal-box { transform: scale(1); }
+        .modal-box::-webkit-scrollbar { width: 3px; }
+        .modal-box::-webkit-scrollbar-thumb { background: var(--purple); }
+        .modal-close {
+            position: absolute; top: 1.2rem; right: 1.4rem;
+            background: none; border: none; cursor: pointer;
+            color: var(--text-dim); font-size: 1.3rem; line-height: 1;
+            transition: color .25s;
+        }
+        .modal-close:hover { color: var(--green); }
+        .modal-tag { font-size: .6rem; color: var(--purple); letter-spacing: .22em; text-transform: uppercase; margin-bottom: .7rem; }
+        .modal-title { font-family: 'Orbitron',sans-serif; font-size: clamp(1.4rem,3vw,2rem); font-weight: 700; color: var(--text); margin-bottom: .45rem; }
+        .modal-pub { font-size: .7rem; color: var(--orange); letter-spacing: .1em; margin-bottom: 1.8rem; display: flex; align-items: center; gap: .5rem; }
+        .modal-pub::before { content: '◆'; font-size: .5rem; }
+        .modal-desc { font-family: 'Rajdhani',sans-serif; font-size: 1.05rem; color: var(--text-dim); line-height: 1.8; margin-bottom: 2rem; }
+        .modal-desc em { color: var(--green); font-style: normal; }
+        .modal-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 1.8rem 0; }
+        .modal-ach-title, .modal-tech-title { font-family: 'Orbitron',sans-serif; font-size: .63rem; letter-spacing: .25em; text-transform: uppercase; margin-bottom: 1rem; }
+        .modal-ach-title { color: var(--green); }
+        .modal-tech-title { color: var(--purple); }
+        .modal-ach-item { display: flex; align-items: flex-start; gap: .7rem; padding: .5rem 0; border-bottom: 1px solid rgba(152,34,224,.1); font-family: 'Rajdhani',sans-serif; font-size: .95rem; color: var(--text-dim); line-height: 1.55; }
+        .ach-icon { color: var(--green); flex-shrink: 0; }
+        .modal-achievements { margin-bottom: 2rem; }
+        .modal-tech { margin-bottom: 2rem; }
+        .modal-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+        .mtag { font-size: .64rem; color: var(--orange); padding: .25rem .7rem; border: 1px solid rgba(255,184,0,.25); background: rgba(255,184,0,.06); letter-spacing: .1em; }
+        .modal-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .modal-link {
+            font-family: 'Rajdhani',sans-serif; font-size: .8rem; font-weight: 600;
+            letter-spacing: .15em; text-transform: uppercase;
+            color: var(--green); text-decoration: none;
+            padding: .5rem 1.2rem; border: 1px solid rgba(83,250,67,.3);
+            background: rgba(83,250,67,.05); transition: all .25s;
+        }
+        .modal-link:hover { background: rgba(83,250,67,.15); border-color: var(--green); box-shadow: 0 0 16px var(--green-glow); }
+
+        /* ===== SWARM'S VISION ===== */
+        #swarms-vision { padding: 6rem 3rem; background: linear-gradient(to bottom, transparent, rgba(12,0,46,.4), transparent); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5rem; max-width: 1180px; width: 100%; align-items: start; }
+        .about-bio p { font-size: .92rem; line-height: 1.95; color: var(--text-dim); margin-bottom: 1.4rem; }
+        .about-bio p strong { color: var(--text); }
+        .about-bio p em { color: var(--green); font-style: normal; }
+
+        .timeline { margin-top: 2.5rem; }
+        .tl-heading { font-family: 'Orbitron',sans-serif; font-size: .7rem; color: var(--purple); letter-spacing: .22em; text-transform: uppercase; margin-bottom: 1.4rem; }
+        .tl-item { display: grid; grid-template-columns: 76px 1fr; gap: .8rem; padding: .9rem 0; border-bottom: 1px solid rgba(152,34,224,.1); position: relative; }
+        .tl-item::after { content:''; position:absolute; left:72px; top:50%; width:7px; height:7px; border-radius:50%; background:var(--purple); box-shadow:0 0 10px var(--purple-glow); transform:translateY(-50%); }
+        .tl-yr { font-family: 'Orbitron',sans-serif; font-size: .63rem; color: var(--text-dim); padding-top: .2rem; }
+        .tl-body { padding-left: .9rem; }
+        .tl-body strong { display: block; font-size: .81rem; color: var(--text); margin-bottom: .18rem; font-family: 'Rajdhani',sans-serif; font-weight: 600; letter-spacing: .04em; }
+        .tl-body span { font-size: .78rem; color: var(--text-dim); }
+
+        .skl-heading { font-family: 'Orbitron',sans-serif; font-size: .7rem; color: var(--purple); letter-spacing: .22em; text-transform: uppercase; margin-bottom: 1.8rem; }
+        .skl-cat { margin-bottom: 1.8rem; }
+        .skl-cat-name { font-size: .64rem; color: var(--green); letter-spacing: .22em; margin-bottom: .9rem; }
+        .skl-list { display: flex; flex-wrap: wrap; gap: .55rem; }
+        .skl-item { font-size: .75rem; padding: .35rem .75rem; border: 1px solid rgba(152,34,224,.28); color: var(--text-dim); background: rgba(152,34,224,.04); transition: all .25s; cursor: default; }
+        .skl-item:hover { border-color: var(--purple); color: var(--text); background: rgba(152,34,224,.12); box-shadow: 0 0 10px var(--purple-glow); }
+
+        .research-box { margin-top: 2.8rem; padding: 1.8rem; border: 1px solid rgba(83,250,67,.18); background: rgba(83,250,67,.025); }
+        .res-heading { font-family: 'Orbitron',sans-serif; font-size: .7rem; color: var(--green); letter-spacing: .22em; text-transform: uppercase; margin-bottom: 1.2rem; }
+        .res-item { font-size: .82rem; color: var(--text-dim); padding: .55rem 0 .55rem 1.4rem; position: relative; border-bottom: 1px solid rgba(83,250,67,.07); line-height: 1.6; }
+        .res-item:last-child { border-bottom: none; }
+        .res-item::before { content: '▸'; position: absolute; left: 0; color: var(--green); }
+        .res-item strong { color: var(--text); font-weight: 600; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            position: relative; z-index: 1; padding: 2.4rem 3rem;
+            border-top: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+            background: rgba(3,0,12,.95);
+        }
+        .foot-logo { font-family: 'Orbitron',sans-serif; font-size: .88rem; font-weight: 700; color: var(--green); letter-spacing: .15em; }
+        .foot-links { display: flex; gap: 2rem; }
+        .foot-links a { font-size: .7rem; color: var(--text-dim); text-decoration: none; letter-spacing: .1em; transition: color .25s; }
+        .foot-links a:hover { color: var(--green); }
+        .foot-copy { font-size: .66rem; color: var(--text-dim); opacity: .4; }
+
+        /* ===== REVEAL ===== */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s ease, transform .75s ease; }
+        .reveal.show { opacity: 1; transform: translateY(0); }
+
+        /* ===== KEYFRAMES ===== */
+        @keyframes fadeUp { from{opacity:0;transform:translateY(28px);} to{opacity:1;transform:translateY(0);} }
+        @keyframes glitch {
+            0%,88%,100%{text-shadow:0 0 40px var(--purple-glow);transform:translateX(0);filter:none;}
+            89%{text-shadow:-4px 0 var(--green),4px 0 var(--orange);transform:translateX(-3px);filter:hue-rotate(90deg);}
+            90%{text-shadow:4px 0 var(--green),-4px 0 var(--orange);transform:translateX(3px);filter:hue-rotate(-90deg);}
+            91%{text-shadow:0 0 40px var(--purple-glow);transform:translateX(0);filter:none;}
+        }
+        @keyframes scrollPulse{0%,100%{opacity:1;transform:scaleY(1);transform-origin:top;}50%{opacity:.25;transform:scaleY(.5);transform-origin:top;}}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.8);}}
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:900px){
+            .stats-grid{grid-template-columns:repeat(2,1fr);}
+            .about-grid{grid-template-columns:1fr;gap:2.5rem;}
+            .exp-grid{grid-template-columns:1fr;}
+        }
+        @media(max-width:600px){
+            nav{padding:1rem 1.2rem;}
+            .nav-links{display:none;}
+            .stats-grid{grid-template-columns:repeat(2,1fr);}
+            .modal-box{padding:2rem 1.4rem;}
+        }
+
+        /* ===== ADMIN EDIT MODE ===== */
+        #admin-bar {
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+            background: rgba(3,0,12,.97); border-top: 2px solid var(--orange);
+            padding: .65rem 2rem;
+            display: flex; align-items: center; gap: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .admin-label { color: var(--orange); font-size: .68rem; letter-spacing: .2em; }
+        .admin-btn {
+            padding: .32rem .9rem; border: 1px solid var(--green);
+            background: transparent; color: var(--green);
+            font-family: 'Rajdhani',sans-serif; font-size: .73rem;
+            font-weight: 600; letter-spacing: .1em;
+            cursor: pointer; text-transform: uppercase; transition: all .2s;
+        }
+        .admin-btn:hover { background: var(--green); color: var(--bg-0); }
+        .admin-btn.warn { border-color: var(--orange); color: var(--orange); }
+        .admin-btn.warn:hover { background: var(--orange); color: var(--bg-0); }
+        .edit-mode [contenteditable] {
+            outline: 1px dashed rgba(255,184,0,.4);
+            min-width: 20px; min-height: 1em; cursor: text;
+        }
+        .edit-mode [contenteditable]:focus {
+            outline: 1px solid var(--orange); background: rgba(255,184,0,.04);
+        }
+        .edit-mode [contenteditable]:hover:not(:focus) {
+            outline: 1px dashed rgba(255,184,0,.75);
+        }
+        #admin-login {
+            position: fixed; inset: 0; z-index: 9999;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(3,0,12,.92); backdrop-filter: blur(20px);
+        }
+        .admin-login-box {
+            background: rgba(6,0,20,.97); border: 1px solid rgba(255,184,0,.4);
+            padding: 2.5rem 3rem; min-width: 340px;
+            box-shadow: 0 0 60px rgba(255,184,0,.08);
+        }
+        .admin-login-title {
+            font-family: 'Orbitron',sans-serif; font-size: .78rem;
+            color: var(--orange); letter-spacing: .25em; margin-bottom: 1.4rem;
+        }
+        .admin-login-input {
+            width: 100%; padding: .6rem 1rem;
+            background: rgba(255,184,0,.04); border: 1px solid rgba(255,184,0,.25);
+            color: var(--text); font-family: 'JetBrains Mono',monospace;
+            font-size: .85rem; outline: none; transition: border-color .25s;
+            margin-bottom: .9rem;
+        }
+        .admin-login-input:focus { border-color: var(--orange); }
+        .admin-err { font-size: .7rem; color: #ff4444; margin-bottom: .8rem; display: none; }
+        .admin-err.show { display: block; }
+    </style>
+</head>
+<body>
+
+<!-- SVG Goo filter for organic creep blobs -->
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <filter id="goo" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="18" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 34 -15" result="goo"/>
+      <feComposite in="goo" in2="SourceGraphic" operator="atop"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- Creep canvas (goo filter applied via CSS to parent div) -->
+<div id="creep-layer"><canvas id="creep-cvs"></canvas></div>
+<!-- Vein canvas (no filter) -->
+<canvas id="vein-cvs"></canvas>
+
+<!-- ─── NAV ─── -->
+<nav>
+    <a href="#hero" class="nav-logo">AVIEL<em>'S</em> ARCHIVE</a>
+    <ul class="nav-links">
+        <li><a href="#evolution-chamber">Evolution Chamber</a></li>
+        <li><a href="#spawning-pool">Spawning Pool</a></li>
+        <li><a href="#swarms-vision">The Vision</a></li>
+    </ul>
+    <div class="nav-actions">
+        <a href="https://github.com/avielbst" class="nav-icon" target="_blank" rel="noopener" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+        <a href="https://www.linkedin.com/in/aviel-ben-siman-tov-msc-89790b222" class="nav-icon" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="mailto:aavviieell@gmail.com" class="btn btn-hire nav-hire">&#9889; Hire Me</a>
+    </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+    <div class="hero-inner">
+        <p class="hero-eyebrow">// initializing_overmind.process ——</p>
+        <h1 class="hero-name">AVIEL BEN<br>SIMAN TOV</h1>
+        <p class="hero-title-line">DATA SCIENTIST &nbsp;·&nbsp; AI RESEARCHER</p>
+
+        <div class="hero-skills">
+            <span class="hsk">Reinforcement Learning</span>
+            <span class="hsk">Deep Learning</span>
+            <span class="hsk">LLMs &amp; RAG</span>
+            <span class="hsk">Anomaly Detection</span>
+            <span class="hsk dim">PyTorch</span>
+            <span class="hsk dim">Python</span>
+            <span class="hsk dim">AWS</span>
+            <span class="hsk dim">Docker</span>
+        </div>
+
+        <p class="hero-sub">
+            First author of <em>LighTellite</em> (NDSS SpaceSec '26) — an RL framework that improved
+            satellite anomaly detection by <strong>+18%</strong> while cutting energy consumption by <strong>22%</strong>.
+            Building end-to-end ML systems at the edge of what's possible.
+        </p>
+        <div class="hero-cta">
+            <a href="#spawning-pool" class="btn btn-fill">View Projects</a>
+            <a href="#swarms-vision" class="btn btn-outline">About Me</a>
+            <a href="mailto:aavviieell@gmail.com" class="btn btn-hire">⚡ Hire Me</a>
+        </div>
+    </div>
+    <div class="scroll-cue">
+        <div class="scroll-line"></div>
+        <span>scroll</span>
+    </div>
+</section>
+
+<!-- ─── EVOLUTION CHAMBER ─── -->
+<section id="evolution-chamber">
+    <div class="section-header reveal">
+        <p class="section-tag">// evolution_chamber.init</p>
+        <h2 class="section-title">EVOLUTION <em>CHAMBER</em></h2>
+        <div class="section-hr"></div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card reveal">
+            <div class="stat-num"><span class="count" data-target="89">0</span></div>
+            <div class="stat-lbl">BSc GPA</div>
+            <div class="stat-sub">Top 10 / 84 · Excellence</div>
+            <div class="stat-bar"><div class="stat-bar-fill" data-w="89"></div></div>
+        </div>
+        <div class="stat-card reveal">
+            <div class="stat-num"><span class="count" data-target="93">0</span></div>
+            <div class="stat-lbl">MSc GPA</div>
+            <div class="stat-sub">Meitar Excellence Program</div>
+            <div class="stat-bar"><div class="stat-bar-fill" data-w="93"></div></div>
+        </div>
+        <div class="stat-card reveal">
+            <div class="stat-num"><span class="count" data-target="2">0</span></div>
+            <div class="stat-lbl">Publications</div>
+            <div class="stat-sub">NDSS SpaceSec</div>
+            <div class="stat-bar"><div class="stat-bar-fill" data-w="100"></div></div>
+        </div>
+        <div class="stat-card reveal">
+            <div class="stat-num"><span class="count" data-target="3">0</span><span class="sfx">+</span></div>
+            <div class="stat-lbl">Years Experience</div>
+            <div class="stat-sub">Industry &amp; Research</div>
+            <div class="stat-bar"><div class="stat-bar-fill" data-w="60"></div></div>
+        </div>
+    </div>
+
+    <div class="exp-grid reveal">
+        <div class="exp-card">
+            <div class="exp-header">
+                <div>
+                    <div class="exp-role">Data Scientist</div>
+                    <div class="exp-company">Cyber@BGU · Deutsche Telekom</div>
+                </div>
+                <span class="exp-dates">2023 — 2025</span>
+            </div>
+            <ul class="exp-bullets">
+                <li>Designed LighTellite — RL-based system for energy-aware anomaly detection on CubeSats.</li>
+                <li>Built unsupervised autoencoder models for multivariate time-series anomaly detection.</li>
+                <li>+18% detection accuracy · −22% energy consumption vs. baseline.</li>
+                <li>Published at NDSS SpaceSec 2026 as first author.</li>
+            </ul>
+            <div class="exp-tags">
+                <span class="exp-tag">Python</span><span class="exp-tag">PyTorch</span>
+                <span class="exp-tag">Reinforcement Learning</span><span class="exp-tag">CubeSat</span>
+                <span class="exp-tag">Anomaly Detection</span>
+            </div>
+        </div>
+
+        <div class="exp-card">
+            <div class="exp-header">
+                <div>
+                    <div class="exp-role">Data Engineer &amp; Analyst</div>
+                    <div class="exp-company">BrightSource Energy · CTO Office</div>
+                </div>
+                <span class="exp-dates">2022 — 2023</span>
+            </div>
+            <ul class="exp-bullets">
+                <li>Owned ETL pipeline component (Bronze–Silver) for data ingestion in AWS.</li>
+                <li>Built and optimized data transfer and monitoring pipelines.</li>
+                <li>Analyzed operational data to generate business insights and research.</li>
+                <li>Delivered under tight timelines with strong self-learning capabilities.</li>
+            </ul>
+            <div class="exp-tags">
+                <span class="exp-tag">Python</span><span class="exp-tag">SQL</span>
+                <span class="exp-tag">PySpark</span><span class="exp-tag">AWS</span>
+                <span class="exp-tag">Airflow</span><span class="exp-tag">SQS</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── SPAWNING POOL ─── -->
+<section id="spawning-pool">
+    <div class="section-header reveal">
+        <p class="section-tag">// spawning_pool.query_all</p>
+        <h2 class="section-title">SPAWNING <em>POOL</em></h2>
+        <div class="section-hr"></div>
+    </div>
+
+    <div class="eggs-hatchery">
+
+        <div class="egg reveal" data-id="0">
+            <span class="egg-pub">NDSS 2026</span>
+            <div class="egg-type">Reinforcement Learning</div>
+            <div class="egg-name">LighTellite</div>
+            <div class="egg-brief">RL-based energy-aware anomaly detection for CubeSat systems</div>
+            <div class="egg-hint">// click to hatch</div>
+        </div>
+
+        <div class="egg reveal" data-id="1" data-rev-delay="90">
+            <span class="egg-pub">NDSS 2025</span>
+            <div class="egg-type">Cybersecurity</div>
+            <div class="egg-name">AegisSat</div>
+            <div class="egg-brief">Satellite cybersecurity testbed for reproducible threat simulation</div>
+            <div class="egg-hint">// click to hatch</div>
+        </div>
+
+        <div class="egg reveal" data-id="2" data-rev-delay="180">
+            <div class="egg-type">Deep Learning · NLP</div>
+            <div class="egg-name">MoE-MLoRA</div>
+            <div class="egg-brief">Mixture-of-Experts LoRA for multi-domain CTR prediction</div>
+            <div class="egg-hint">// click to hatch</div>
+        </div>
+
+        <div class="egg reveal" data-id="3" data-rev-delay="270">
+            <div class="egg-type">Computer Vision</div>
+            <div class="egg-name">Flicker-of-Hope</div>
+            <div class="egg-brief">Diffusion-based defense against adversarial patch attacks</div>
+            <div class="egg-hint">// click to hatch</div>
+        </div>
+
+        <div class="egg reveal" data-id="4" data-rev-delay="360">
+            <div class="egg-type">LLM · RAG</div>
+            <div class="egg-name">RAG Research<br>Assistant</div>
+            <div class="egg-brief">RAG over 50K academic abstracts with LanceDB + FastAPI</div>
+            <div class="egg-hint">// click to hatch</div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ─── EGG MODAL ─── -->
+<div id="egg-modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+        <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+        <div id="modal-content"></div>
+    </div>
+</div>
+
+<!-- ─── SWARM'S VISION ─── -->
+<section id="swarms-vision">
+    <div class="section-header reveal">
+        <p class="section-tag">// swarm.vision.manifest</p>
+        <h2 class="section-title">THE SWARM'S <em>VISION</em></h2>
+        <div class="section-hr"></div>
+    </div>
+
+    <div class="about-grid">
+        <div class="about-bio reveal">
+            <p>I am <strong>Aviel Ben Siman Tov</strong> — a <em>Data Scientist and AI Researcher</em> specializing in reinforcement learning, deep learning, and generative AI. Like the Zerg's relentless adaptation, I build systems that evolve and self-improve under real-world constraints.</p>
+            <p>First author of <em>LighTellite</em> (NDSS SpaceSec 2026) and contributor to <em>AegisSat</em> — spanning satellite cybersecurity to LLM pipelines. MSc from Ben-Gurion University with GPA 93, Meitar Excellence Program for top students.</p>
+            <p>Strong foundation in statistics, ML and logical reasoning. Independent, self-driven, capable of delivering end-to-end ML systems under tight timelines.</p>
+
+            <div class="timeline">
+                <p class="tl-heading">// evolution_log</p>
+                <div class="tl-item">
+                    <span class="tl-yr">23–25</span>
+                    <div class="tl-body">
+                        <strong>Data Scientist — Cyber@BGU · Deutsche Telekom</strong>
+                        <span>RL-based anomaly detection · NDSS SpaceSec 2026 · First Author</span>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <span class="tl-yr">23–25</span>
+                    <div class="tl-body">
+                        <strong>MSc Data &amp; Information — AI Specialization</strong>
+                        <span>Ben-Gurion University · GPA 93 · Meitar Excellence Program</span>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <span class="tl-yr">22–23</span>
+                    <div class="tl-body">
+                        <strong>Data Engineer &amp; Analyst — BrightSource Energy</strong>
+                        <span>ETL pipelines · AWS · CTO Office</span>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <span class="tl-yr">20–24</span>
+                    <div class="tl-body">
+                        <strong>BSc Data Science — Ben-Gurion University</strong>
+                        <span>GPA 89 · Ranked 10 / 84 students</span>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <span class="tl-yr">15–18</span>
+                    <div class="tl-body">
+                        <strong>Military Service — Electronic Technician</strong>
+                        <span>Ground-to-air missile systems · Ort Aviation &amp; Space GPA 93</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="skills-panel reveal">
+            <p class="skl-heading">// capabilities.index</p>
+
+            <div class="skl-cat">
+                <p class="skl-cat-name">ML &amp; AI CORE</p>
+                <div class="skl-list">
+                    <span class="skl-item">Reinforcement Learning</span>
+                    <span class="skl-item">Deep Learning</span>
+                    <span class="skl-item">Agentic Frameworks</span>
+                    <span class="skl-item">LLMs &amp; RAG</span>
+                    <span class="skl-item">Anomaly Detection</span>
+                    <span class="skl-item">Generative AI</span>
+                </div>
+            </div>
+
+            <div class="skl-cat">
+                <p class="skl-cat-name">LANGUAGES &amp; FRAMEWORKS</p>
+                <div class="skl-list">
+                    <span class="skl-item">Python</span>
+                    <span class="skl-item">SQL</span>
+                    <span class="skl-item">PyTorch</span>
+                    <span class="skl-item">PySpark</span>
+                    <span class="skl-item">FastAPI</span>
+                </div>
+            </div>
+
+            <div class="skl-cat">
+                <p class="skl-cat-name">INFRASTRUCTURE</p>
+                <div class="skl-list">
+                    <span class="skl-item">AWS (Airflow · SQS)</span>
+                    <span class="skl-item">Docker</span>
+                    <span class="skl-item">LanceDB</span>
+                    <span class="skl-item">Git</span>
+                </div>
+            </div>
+
+            <div class="research-box">
+                <p class="res-heading">// publications</p>
+                <div class="res-item">
+                    <strong>NDSS SpaceSec 2026 · First Author</strong><br>
+                    LighTellite: RL-Based Framework for Energy-Efficient Satellite Anomaly Detection
+                </div>
+                <div class="res-item">
+                    <strong>NDSS SpaceSec 2025 · Contributor</strong><br>
+                    AegisSat: A Satellite Cybersecurity Testbed
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <div class="foot-logo">AVIEL'S ARCHIVE</div>
+    <div class="foot-links">
+        <a href="https://github.com/avielbst" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/aviel-ben-siman-tov-msc-89790b222" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:aavviieell@gmail.com">Email</a>
+    </div>
+    <span class="foot-copy">// Evolution never stops.</span>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════
+   CREEP BACKGROUND — SC2 GOO + CANVAS
+═══════════════════════════════════════ */
+const creepCvs = document.getElementById('creep-cvs');
+const veinCvs  = document.getElementById('vein-cvs');
+const cc = creepCvs.getContext('2d');
+const vc = veinCvs.getContext('2d');
+let W, H;
+
+let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+let prevMX = mouseX, prevMY = mouseY;
+let clearX = mouseX, clearY = mouseY, clearR = 0;
+
+function resizeAll() {
+    W = window.innerWidth; H = window.innerHeight;
+    creepCvs.width = W; creepCvs.height = H;
+    veinCvs.width  = W; veinCvs.height  = H;
+}
+resizeAll();
+window.addEventListener('resize', resizeAll);
+document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+
+const MCOL = [18,  8,  32];
+const DCOL = [10,  3,  20];
+const ECOL = [52, 22,  85];
+const GCOL = [83, 250, 67];
+
+class CreepBlob {
+    constructor(type, random = true) {
+        this.type = type;
+        this.cid  = Math.random();
+        this.reset(random);
+    }
+    reset(random) {
+        this.x = random ? Math.random() * W : (Math.random() < .5 ? -150 : W + 150);
+        this.y = random ? Math.random() * H : Math.random() * H;
+        switch (this.type) {
+            case 'anchor':
+                this.r  = 160 + Math.random() * 60;
+                this.vx = (Math.random() - .5) * .06;
+                this.vy = (Math.random() - .5) * .06;
+                break;
+            case 'main':
+                this.r  = 75 + Math.random() * 55;
+                this.vx = (Math.random() - .5) * .38;
+                this.vy = (Math.random() - .5) * .38;
+                break;
+            case 'fiber':
+                this.r  = 55 + Math.random() * 15;
+                this.vx = (Math.random() - .5) * .65;
+                this.vy = (Math.random() - .5) * .65;
+                break;
+        }
+        this.phase    = Math.random() * Math.PI * 2;
+        this.phaseSpd = 0.002 + Math.random() * 0.004;
+    }
+    update() {
+        this.phase += this.phaseSpd;
+        if (this.type !== 'anchor') {
+            const repelR = this.type === 'fiber' ? 260 : 200;
+            const force  = this.type === 'fiber' ? .014 : .009;
+            const dx = mouseX - this.x, dy = mouseY - this.y;
+            const d  = Math.hypot(dx, dy);
+            if (d < repelR && d > 0) {
+                const falloff = 1 - d / repelR;
+                this.vx -= (dx / d) * force * falloff;
+                this.vy -= (dy / d) * force * falloff;
+            }
+            const cap = this.type === 'fiber' ? 1.2 : 0.75;
+            const spd = Math.hypot(this.vx, this.vy);
+            if (spd > cap) { this.vx *= cap / spd; this.vy *= cap / spd; }
+        }
+        this.x += this.vx; this.y += this.vy;
+        const pad = this.r * 2.5;
+        if (this.x < -pad) this.x = W + pad / 2;
+        if (this.x > W+pad) this.x = -pad / 2;
+        if (this.y < -pad) this.y = H + pad / 2;
+        if (this.y > H+pad) this.y = -pad / 2;
+    }
+    draw() {
+        const amp   = this.type === 'anchor' ? .04 : (this.type === 'fiber' ? .18 : .12);
+        const pulse = 1 + Math.sin(this.phase) * amp;
+        const r     = this.r * pulse;
+        const col   = this.type === 'anchor' ? DCOL : (this.type === 'fiber' ? ECOL : MCOL);
+        const alpha = this.type === 'anchor' ? .96 : .90;
+        cc.beginPath();
+        cc.arc(this.x, this.y, r, 0, Math.PI * 2);
+        cc.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${alpha})`;
+        cc.fill();
+    }
+}
+
+const blobs = [
+    ...Array.from({ length: 8  }, () => new CreepBlob('anchor', true)),
+    ...Array.from({ length: 32 }, () => new CreepBlob('main',   true)),
+    ...Array.from({ length: 26 }, () => new CreepBlob('fiber',  true)),
+];
+
+function drawOverlay() {
+    vc.clearRect(0, 0, W, H);
+    if (clearR > 2) {
+        const coronaR = clearR * 1.5;
+        const ring = vc.createRadialGradient(clearX, clearY, clearR * 0.6, clearX, clearY, coronaR);
+        ring.addColorStop(0,    'rgba(0,0,0,0)');
+        ring.addColorStop(0.55, 'rgba(55,15,90,0)');
+        ring.addColorStop(0.72, 'rgba(90,25,140,0.15)');
+        ring.addColorStop(0.88, 'rgba(110,20,180,0.07)');
+        ring.addColorStop(1,    'rgba(110,20,180,0)');
+        vc.fillStyle = ring;
+        vc.beginPath();
+        vc.arc(clearX, clearY, coronaR, 0, Math.PI * 2);
+        vc.fill();
+    }
+}
+
+function creepFrame() {
+    const mouseSpeed = Math.hypot(mouseX - prevMX, mouseY - prevMY);
+    prevMX = mouseX; prevMY = mouseY;
+
+    const targetClearR = Math.max(38, 95 - mouseSpeed * 2.8);
+    clearX += (mouseX - clearX) * 0.10;
+    clearY += (mouseY - clearY) * 0.10;
+    clearR += (targetClearR - clearR) * 0.07;
+
+    cc.clearRect(0, 0, W, H);
+    blobs.forEach(b => { b.update(); b.draw(); });
+
+    if (clearR > 2) {
+        cc.globalCompositeOperation = 'destination-out';
+        const hole = cc.createRadialGradient(clearX, clearY, 0, clearX, clearY, clearR);
+        hole.addColorStop(0,   'rgba(0,0,0,1)');
+        hole.addColorStop(0.7, 'rgba(0,0,0,1)');
+        hole.addColorStop(1,   'rgba(0,0,0,0.35)');
+        cc.fillStyle = hole;
+        cc.beginPath();
+        cc.arc(clearX, clearY, clearR, 0, Math.PI * 2);
+        cc.fill();
+        cc.globalCompositeOperation = 'source-over';
+    }
+
+    drawOverlay();
+    requestAnimationFrame(creepFrame);
+}
+creepFrame();
+
+/* ═══════════════════════════════════════
+   PROJECT DATA FOR EGG MODAL
+═══════════════════════════════════════ */
+const PROJECTS = [
+    {
+        tag: 'Reinforcement Learning · Research',
+        title: 'LighTellite',
+        pub: 'Published · NDSS SpaceSec 2026 · First Author',
+        desc: `An <em>RL-based decision-making framework</em> for energy-aware anomaly detection on resource-constrained CubeSat systems. LighTellite uses a custom reward formulation that jointly optimizes detection accuracy and energy budget — enabling deployable ML inference in space where power is a hard constraint.`,
+        achievements: [
+            { icon: '▲', text: '+18% improvement in anomaly detection accuracy over baseline methods' },
+            { icon: '▼', text: '−22% reduction in energy consumption during inference' },
+            { icon: '◆', text: 'End-to-end pipeline from research exploration to deployment-ready inference' },
+            { icon: '◆', text: 'Industry-driven research in collaboration with Deutsche Telekom' },
+        ],
+        tags: ['Python','PyTorch','Reinforcement Learning','Autoencoder','CubeSat','Anomaly Detection','Time-Series'],
+        links: [{ label: 'NDSS SpaceSec 2026', href: '#' }]
+    },
+    {
+        tag: 'Cybersecurity · Research',
+        title: 'AegisSat',
+        pub: 'Published · NDSS SpaceSec 2025 · Contributor',
+        desc: `A <em>satellite cybersecurity testbed</em> designed to simulate cyber threats against CubeSat systems in a controlled, reproducible environment. AegisSat enables security researchers to design, execute, and validate attack scenarios and defenses where physical patching of in-orbit hardware is impossible.`,
+        achievements: [
+            { icon: '◆', text: 'Contributed to testbed architecture and attack scenario design' },
+            { icon: '◆', text: 'Enables reproducible cybersecurity research on constrained satellite platforms' },
+            { icon: '◆', text: 'Published at top-tier security venue (NDSS 2025)' },
+        ],
+        tags: ['Python','CubeSat','Cybersecurity','Testbed','Security Research','Satellite Systems'],
+        links: [{ label: 'NDSS SpaceSec 2025', href: '#' }]
+    },
+    {
+        tag: 'Deep Learning · NLP',
+        title: 'MoE-MLoRA',
+        pub: 'Research Project',
+        desc: `A <em>Mixture-of-Experts</em> architecture combined with <em>Multi-LoRA (MLoRA)</em> for efficient multi-domain click-through rate (CTR) prediction. Enables expert routing and domain-specific parameter adaptation while maintaining a compact shared backbone — dramatically reducing per-domain fine-tuning cost.`,
+        achievements: [
+            { icon: '◆', text: 'Developed expert routing mechanism for multi-domain domain adaptation' },
+            { icon: '◆', text: 'Efficient parameter sharing via Low-Rank Adaptation (LoRA)' },
+            { icon: '◆', text: 'Evaluated on multi-domain CTR prediction benchmarks' },
+        ],
+        tags: ['Python','PyTorch','Mixture-of-Experts','LoRA','CTR Prediction','Multi-domain','NLP'],
+        links: [{ label: 'GitHub', href: 'https://github.com/avielbst' }]
+    },
+    {
+        tag: 'Computer Vision · Defense',
+        title: 'Flicker-of-Hope',
+        pub: 'Research Project',
+        desc: `A <em>diffusion-based adversarial defense</em> against physical adversarial patch attacks on object detection models. By applying controlled diffusion denoising on input images at inference time, Flicker-of-Hope degrades the structured adversarial noise in patches while preserving natural image structure.`,
+        achievements: [
+            { icon: '◆', text: 'Leverages diffusion models as a plug-in pre-processing defense' },
+            { icon: '◆', text: 'Effective against physical patch attacks on YOLO-class detectors' },
+            { icon: '◆', text: 'No model retraining required — operates at inference time' },
+        ],
+        tags: ['Python','PyTorch','Diffusion Models','Adversarial ML','Computer Vision','Object Detection'],
+        links: [{ label: 'GitHub', href: 'https://github.com/avielbst' }]
+    },
+    {
+        tag: 'LLM · Data Engineering',
+        title: 'RAG Research Assistant',
+        pub: 'End-to-End Project',
+        desc: `A production-ready <em>Retrieval-Augmented Generation (RAG)</em> system built over a corpus of <em>50,000 academic paper abstracts</em>. Uses LanceDB for high-performance vector retrieval, served via FastAPI with Docker containerization for fully reproducible deployment.`,
+        achievements: [
+            { icon: '◆', text: 'Indexes and retrieves across 50K+ academic abstracts' },
+            { icon: '◆', text: 'LanceDB for fast approximate nearest-neighbor vector search' },
+            { icon: '◆', text: 'Production-deployed via FastAPI REST API + Docker' },
+            { icon: '◆', text: 'End-to-end: data ingestion → embedding → retrieval → generation' },
+        ],
+        tags: ['Python','LanceDB','FastAPI','Docker','RAG','LLMs','Vector DB','NLP'],
+        links: [{ label: 'GitHub', href: 'https://github.com/avielbst' }]
+    }
+];
+
+/* ═══════════════════════════════════════
+   EGG INTERACTIONS
+═══════════════════════════════════════ */
+const modal      = document.getElementById('egg-modal');
+const modalContent = document.getElementById('modal-content');
+const modalClose = document.getElementById('modal-close');
+
+function openEgg(id) {
+    const p = PROJECTS[id];
+    modalContent.innerHTML = `
+        <p class="modal-tag">${p.tag}</p>
+        <h2 class="modal-title">${p.title}</h2>
+        <p class="modal-pub">${p.pub}</p>
+        <div class="modal-divider"></div>
+        <p class="modal-desc">${p.desc}</p>
+        <div class="modal-achievements">
+            <p class="modal-ach-title">// key_achievements</p>
+            ${p.achievements.map(a => `
+            <div class="modal-ach-item">
+                <span class="ach-icon">${a.icon}</span><span>${a.text}</span>
+            </div>`).join('')}
+        </div>
+        <div class="modal-tech">
+            <p class="modal-tech-title">// tech_stack</p>
+            <div class="modal-tags">${p.tags.map(t => `<span class="mtag">${t}</span>`).join('')}</div>
+        </div>
+        <div class="modal-links">${p.links.map(l => `<a href="${l.href}" class="modal-link" target="_blank" rel="noopener">${l.label} ↗</a>`).join('')}</div>
+    `;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if (window._adminMakeModalEditable) window._adminMakeModalEditable(id);
+}
+
+function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.egg').forEach(egg => {
+    egg.addEventListener('click', () => {
+        const id = parseInt(egg.dataset.id);
+        egg.classList.add('cracking');
+        setTimeout(() => { egg.classList.remove('cracking'); openEgg(id); }, 560);
+    });
+});
+
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            const delay = parseInt(e.target.dataset.revDelay || 0);
+            setTimeout(() => e.target.classList.add('show'), delay);
+        }
+    });
+}, { threshold: .1 });
+
+document.querySelectorAll('.reveal').forEach((el, i) => {
+    if (!el.dataset.revDelay) el.dataset.revDelay = (i % 4) * 90;
+    revObs.observe(el);
+});
+
+/* ═══════════════════════════════════════
+   COUNT-UP
+═══════════════════════════════════════ */
+const countObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target, target = +el.dataset.target, t0 = Date.now(), dur = 1800;
+        (function tick() {
+            const p = Math.min((Date.now()-t0)/dur, 1), eased = 1-Math.pow(1-p,3);
+            el.textContent = Math.floor(eased * target);
+            if (p < 1) requestAnimationFrame(tick); else el.textContent = target;
+        })();
+        countObs.unobserve(el);
+    });
+}, { threshold: .5 });
+document.querySelectorAll('.count').forEach(el => countObs.observe(el));
+
+/* ═══════════════════════════════════════
+   STAT BARS
+═══════════════════════════════════════ */
+const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        setTimeout(() => { e.target.style.width = e.target.dataset.w + '%'; }, 350);
+        barObs.unobserve(e.target);
+    });
+}, { threshold: .5 });
+document.querySelectorAll('.stat-bar-fill').forEach(el => barObs.observe(el));
+
+/* ═══════════════════════════════════════
+   ACTIVE NAV
+═══════════════════════════════════════ */
+const secObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting)
+            document.querySelectorAll('.nav-links a').forEach(a =>
+                a.classList.toggle('active', a.getAttribute('href') === '#'+e.target.id));
+    });
+}, { threshold: .4 });
+document.querySelectorAll('section').forEach(s => secObs.observe(s));
+
+/* ═══════════════════════════════════════
+   ADMIN EDIT MODE  — triple-click logo
+   Default password: Archive2025!
+   To change: open browser console and run:
+     crypto.subtle.digest('SHA-256', new TextEncoder().encode('YourNewPassword'))
+       .then(b => console.log(Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')))
+   Then replace ADMIN.hash below with the result.
+═══════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  const ADMIN = {
+    hash: '7cbaba17299f02d862888f53506928eb69ef3228b700a1d1b4b1282b93f6f1d3',
+    key:  'portfolio_admin_v1',
+    on:   false
+  };
+
+  /* ── Auto-tag editable elements ── */
+  const EDIT_SEL = [
+    '.hero-eyebrow','.hero-name','.hero-title-line','.hero-sub',
+    '.hsk','.stat-num','.stat-lbl','.stat-sub',
+    '.exp-role','.exp-company','.exp-dates','.exp-bullets','.exp-tags',
+    '.egg-pub','.egg-type','.egg-name','.egg-brief',
+    '.about-bio p','.tl-yr','.tl-body',
+    '.skl-cat-name','.skl-item','.res-item'
+  ];
+
+  function tagEditables() {
+    EDIT_SEL.forEach(sel => {
+      document.querySelectorAll(sel).forEach((el, i) => {
+        if (!el.dataset.eid)
+          el.dataset.eid = sel.replace(/[^a-zA-Z0-9]/g,'_') + '_' + i;
+      });
+    });
+  }
+
+  /* ── Load saved content from localStorage ── */
+  function loadSavedContent() {
+    try {
+      const raw = localStorage.getItem(ADMIN.key);
+      if (!raw) return;
+      const { dom, projects } = JSON.parse(raw);
+      if (dom) {
+        Object.entries(dom).forEach(([eid, html]) => {
+          const el = document.querySelector(`[data-eid="${eid}"]`);
+          if (!el) return;
+          el.innerHTML = html;
+          /* keep count-up animation in sync with edited values */
+          const ct = el.querySelector('.count');
+          if (ct) { const m = html.match(/(\d+)/); if (m) ct.dataset.target = m[1]; }
+        });
+      }
+      if (projects) {
+        projects.forEach((p, i) => { if (PROJECTS[i]) Object.assign(PROJECTS[i], p); });
+      }
+    } catch (e) { console.warn('[admin] load failed:', e); }
+  }
+
+  /* ── SHA-256 helper ── */
+  async function sha256(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+
+  /* ── Triple-click logo triggers login ── */
+  let clicks = 0, clickT;
+  document.querySelector('.nav-logo').addEventListener('click', () => {
+    clicks++;
+    clearTimeout(clickT);
+    clickT = setTimeout(() => { clicks = 0; }, 700);
+    if (clicks >= 3) { clicks = 0; if (!ADMIN.on) showLogin(); }
+  });
+
+  /* ── Login modal ── */
+  function showLogin() {
+    const el = document.createElement('div');
+    el.id = 'admin-login';
+    el.innerHTML = `
+      <div class="admin-login-box">
+        <div class="admin-login-title">// admin.authenticate</div>
+        <input type="password" id="adm-pass" class="admin-login-input"
+               placeholder="ENTER ACCESS CODE" autocomplete="off">
+        <div class="admin-err" id="adm-err">// ACCESS DENIED — invalid credentials</div>
+        <div style="display:flex;gap:.8rem">
+          <button class="admin-btn" id="adm-ok">AUTHENTICATE</button>
+          <button class="admin-btn warn" id="adm-cancel">ABORT</button>
+        </div>
+      </div>`;
+    document.body.appendChild(el);
+    const pass = el.querySelector('#adm-pass'), err = el.querySelector('#adm-err');
+    pass.focus();
+    el.querySelector('#adm-ok').addEventListener('click', async () => {
+      if ((await sha256(pass.value)) === ADMIN.hash) { el.remove(); enableEdit(); }
+      else { err.classList.add('show'); pass.value = ''; pass.focus(); }
+    });
+    pass.addEventListener('keydown', e => {
+      if (e.key === 'Enter')  el.querySelector('#adm-ok').click();
+      if (e.key === 'Escape') el.remove();
+    });
+    el.querySelector('#adm-cancel').addEventListener('click', () => el.remove());
+  }
+
+  /* ── Enable / Disable edit mode ── */
+  function enableEdit() {
+    ADMIN.on = true;
+    document.body.classList.add('edit-mode');
+    document.querySelectorAll('[data-eid]').forEach(el => { el.contentEditable = 'true'; });
+    buildBar();
+    flash('// Edit mode active — click any text to edit it');
+  }
+
+  function disableEdit() {
+    ADMIN.on = false;
+    document.body.classList.remove('edit-mode');
+    document.querySelectorAll('[data-eid]').forEach(el => el.removeAttribute('contentEditable'));
+    document.getElementById('admin-bar')?.remove();
+  }
+
+  /* ── Admin bar ── */
+  function buildBar() {
+    const bar = document.createElement('div');
+    bar.id = 'admin-bar';
+    bar.innerHTML = `
+      <span class="admin-label">// EDIT MODE ACTIVE</span>
+      <button class="admin-btn" id="ab-save">▶ SAVE</button>
+      <button class="admin-btn warn" id="ab-reset">↺ RESET ALL</button>
+      <button class="admin-btn" id="ab-export">⬇ EXPORT HTML</button>
+      <button class="admin-btn warn" id="ab-exit">✕ EXIT</button>
+      <span style="margin-left:auto;color:var(--text-dim);font-size:.6rem;opacity:.4">
+        triple-click logo to re-enter
+      </span>`;
+    document.body.appendChild(bar);
+    document.getElementById('ab-save').addEventListener('click', saveContent);
+    document.getElementById('ab-reset').addEventListener('click', resetContent);
+    document.getElementById('ab-export').addEventListener('click', exportHTML);
+    document.getElementById('ab-exit').addEventListener('click', disableEdit);
+  }
+
+  /* ── Save ── */
+  function saveContent() {
+    const dom = {};
+    document.querySelectorAll('[data-eid]').forEach(el => { dom[el.dataset.eid] = el.innerHTML; });
+    localStorage.setItem(ADMIN.key, JSON.stringify({ dom, projects: PROJECTS }));
+    flash('// Changes saved');
+  }
+
+  /* ── Reset ── */
+  function resetContent() {
+    if (!confirm('Reset ALL changes back to original? This cannot be undone.')) return;
+    localStorage.removeItem(ADMIN.key);
+    flash('// Resetting…');
+    setTimeout(() => location.reload(), 600);
+  }
+
+  /* ── Export clean HTML ── */
+  function exportHTML() {
+    const bar = document.getElementById('admin-bar');
+    bar.style.display = 'none';
+    document.body.classList.remove('edit-mode');
+    document.querySelectorAll('[data-eid]').forEach(el => el.removeAttribute('contentEditable'));
+
+    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+    bar.style.display = '';
+    document.body.classList.add('edit-mode');
+    document.querySelectorAll('[data-eid]').forEach(el => { el.contentEditable = 'true'; });
+
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+    a.download = 'index.html';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    flash('// index.html exported — ready to deploy!');
+  }
+
+  /* ── Make project modal editable (called by openEgg hook) ── */
+  window._adminMakeModalEditable = function (id) {
+    if (!ADMIN.on) return;
+    const box = document.querySelector('.modal-box');
+    if (!box) return;
+    box.querySelector('.adm-proj-btn')?.remove();
+
+    ['.modal-tag','.modal-title','.modal-pub','.modal-desc'].forEach(sel => {
+      const el = box.querySelector(sel); if (el) el.contentEditable = 'true';
+    });
+    box.querySelectorAll('.modal-ach-item span:last-child').forEach(el => { el.contentEditable = 'true'; });
+    box.querySelectorAll('.mtag').forEach(el => { el.contentEditable = 'true'; });
+
+    const btn = document.createElement('button');
+    btn.className = 'admin-btn adm-proj-btn';
+    btn.style.marginTop = '1.2rem';
+    btn.textContent = '▶ SAVE PROJECT';
+    btn.addEventListener('click', () => {
+      const p = PROJECTS[id];
+      const tag   = box.querySelector('.modal-tag');
+      const title = box.querySelector('.modal-title');
+      const pub   = box.querySelector('.modal-pub');
+      const desc  = box.querySelector('.modal-desc');
+      if (tag)   p.tag   = tag.innerHTML;
+      if (title) p.title = title.textContent.trim();
+      if (pub)   p.pub   = pub.textContent.trim();
+      if (desc)  p.desc  = desc.innerHTML;
+      p.achievements = Array.from(box.querySelectorAll('.modal-ach-item span:last-child'))
+        .map((el, i) => ({ icon: p.achievements[i]?.icon || '◆', text: el.textContent.trim() }));
+      p.tags = Array.from(box.querySelectorAll('.mtag')).map(el => el.textContent.trim());
+
+      /* sync egg card */
+      const egg = document.querySelector(`.egg[data-id="${id}"]`);
+      if (egg) {
+        const n = egg.querySelector('.egg-name'), b = egg.querySelector('.egg-brief');
+        if (n) n.textContent = p.title;
+        if (b) b.textContent = p.desc.replace(/<[^>]*>/g,'').slice(0,80) + '…';
+      }
+      flash(`// Project "${p.title}" saved`);
+    });
+    box.querySelector('#modal-content').appendChild(btn);
+  };
+
+  /* ── Flash notification ── */
+  function flash(msg) {
+    const el = document.createElement('div');
+    el.style.cssText = `position:fixed;top:76px;right:1.5rem;z-index:9999;
+      background:rgba(3,0,12,.97);border:1px solid var(--green);
+      color:var(--green);font-family:'JetBrains Mono',monospace;
+      font-size:.7rem;padding:.6rem 1.1rem;
+      box-shadow:0 0 18px var(--green-glow);animation:fadeUp .3s ease`;
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 2500);
+  }
+
+  /* ── Init ── */
+  tagEditables();
+  loadSavedContent();
+
+}());
+</script>
+</body>
+</html>
