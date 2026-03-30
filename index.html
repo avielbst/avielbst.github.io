@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aviel Ben Siman Tov | Data Science Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&amp;family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,400&amp;family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <style>
         /* ===== RESET & BASE ===== */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -497,63 +496,59 @@
         .admin-err.show { display: block; }
     </style>
 </head>
-<body>
+<body class="" style="">
 
 <!-- SVG Goo filter for organic creep blobs -->
 <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
   <defs>
     <filter id="goo" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="18" result="blur"/>
-      <feColorMatrix in="blur" type="matrix"
-        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 34 -15" result="goo"/>
-      <feComposite in="goo" in2="SourceGraphic" operator="atop"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="18" result="blur"></feGaussianBlur>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 34 -15" result="goo"></feColorMatrix>
+      <feComposite in="goo" in2="SourceGraphic" operator="atop"></feComposite>
     </filter>
   </defs>
 </svg>
 
 <!-- Creep canvas (goo filter applied via CSS to parent div) -->
-<div id="creep-layer"><canvas id="creep-cvs"></canvas></div>
+<div id="creep-layer"><canvas id="creep-cvs" width="1536" height="730"></canvas></div>
 <!-- Vein canvas (no filter) -->
-<canvas id="vein-cvs"></canvas>
+<canvas id="vein-cvs" width="1536" height="730"></canvas>
 
 <!-- ─── NAV ─── -->
 <nav>
     <a href="#hero" class="nav-logo">AVIEL<em>'S</em> ARCHIVE</a>
     <ul class="nav-links">
-        <li><a href="#evolution-chamber">Evolution Chamber</a></li>
-        <li><a href="#spawning-pool">Spawning Pool</a></li>
-        <li><a href="#swarms-vision">The Vision</a></li>
+        <li><a href="#evolution-chamber" class="">Evolution Chamber</a></li>
+        <li><a href="#spawning-pool" class="">Spawning Pool</a></li>
+        <li><a href="#swarms-vision" class="">The Vision</a></li>
     </ul>
     <div class="nav-actions">
-        <a href="https://github.com/avielbst" class="nav-icon" target="_blank" rel="noopener" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
-        <a href="https://www.linkedin.com/in/aviel-ben-siman-tov-msc-89790b222" class="nav-icon" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-        <a href="mailto:aavviieell@gmail.com" class="btn btn-hire nav-hire">&#9889; Hire Me</a>
+        <a href="https://github.com/avielbst" class="nav-icon" target="_blank" rel="noopener" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg></a>
+        <a href="https://www.linkedin.com/in/aviel-ben-siman-tov-msc-89790b222" class="nav-icon" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg></a>
+        <a href="mailto:aavviieell@gmail.com" class="btn btn-hire nav-hire">⚡ Hire Me</a>
     </div>
 </nav>
 
 <!-- ─── HERO ─── -->
 <section id="hero">
     <div class="hero-inner">
-        <p class="hero-eyebrow">// initializing_overmind.process ——</p>
-        <h1 class="hero-name">AVIEL BEN<br>SIMAN TOV</h1>
-        <p class="hero-title-line">DATA SCIENTIST &nbsp;·&nbsp; AI RESEARCHER</p>
+        <p class="hero-eyebrow" data-eid="_hero_eyebrow_0">// initializing_overmind.process ——</p>
+        <h1 class="hero-name" data-eid="_hero_name_0">AVIEL BEN<br>SIMAN TOV</h1>
+        <p class="hero-title-line" data-eid="_hero_title_line_0">DATA SCIENTIST &nbsp;·&nbsp; AI RESEARCHER</p>
 
         <div class="hero-skills">
-            <span class="hsk">Reinforcement Learning</span>
-            <span class="hsk">Deep Learning</span>
-            <span class="hsk">LLMs &amp; RAG</span>
-            <span class="hsk">Anomaly Detection</span>
-            <span class="hsk dim">PyTorch</span>
-            <span class="hsk dim">Python</span>
-            <span class="hsk dim">AWS</span>
-            <span class="hsk dim">Docker</span>
+            <span class="hsk" data-eid="_hsk_0">Reinforcement Learning</span>
+            <span class="hsk" data-eid="_hsk_1">Deep Learning</span>
+            <span class="hsk" data-eid="_hsk_2">LLMs &amp; RAG</span>
+            <span class="hsk" data-eid="_hsk_3">Anomaly Detection</span>
+            <span class="hsk dim" data-eid="_hsk_4">PyTorch</span>
+            <span class="hsk dim" data-eid="_hsk_5">Python</span>
+            <span class="hsk dim" data-eid="_hsk_6">AWS</span>
+            <span class="hsk dim" data-eid="_hsk_7">SQL</span>
         </div>
 
-        <p class="hero-sub">
-            First author of <em>LighTellite</em> (NDSS SpaceSec '26) — an RL framework that improved
-            satellite anomaly detection by <strong>+18%</strong> while cutting energy consumption by <strong>−22%</strong>.
-            Building end-to-end ML systems at the edge of what's possible.
-        </p>
+        <p class="hero-sub" data-eid="_hero_sub_0"><div><span style="font-size: clamp(0.9rem, 2vw, 1.18rem); letter-spacing: 0.06em;">First author of </span><em style="font-size: clamp(0.9rem, 2vw, 1.18rem); letter-spacing: 0.06em;">LighTellite</em><span style="font-size: clamp(0.9rem, 2vw, 1.18rem); letter-spacing: 0.06em;"> (NDSS SpaceSec '26) — an RL framework that improved
+            satellite anomaly detection by </span><strong style="font-size: clamp(0.9rem, 2vw, 1.18rem); letter-spacing: 0.06em;">+18%</strong><span style="font-size: clamp(0.9rem, 2vw, 1.18rem); letter-spacing: 0.06em;"> while cutting energy consumption by </span><strong style="font-size: clamp(0.9rem, 2vw, 1.18rem); letter-spacing: 0.06em;">22%</strong><span style="font-size: clamp(0.9rem, 2vw, 1.18rem); letter-spacing: 0.06em;">.&nbsp;</span><span style="font-size: clamp(0.9rem, 2vw, 1.18rem); letter-spacing: 0.06em;">Building end-to-end ML systems at the edge of what's possible.</span></div></p>
         <div class="hero-cta">
             <a href="#spawning-pool" class="btn btn-fill">View Projects</a>
             <a href="#swarms-vision" class="btn btn-outline">About Me</a>
@@ -568,55 +563,55 @@
 
 <!-- ─── EVOLUTION CHAMBER ─── -->
 <section id="evolution-chamber">
-    <div class="section-header reveal">
+    <div class="section-header reveal show" data-rev-delay="0">
         <p class="section-tag">// evolution_chamber.init</p>
         <h2 class="section-title">EVOLUTION <em>CHAMBER</em></h2>
         <div class="section-hr"></div>
     </div>
 
     <div class="stats-grid">
-        <div class="stat-card reveal">
-            <div class="stat-num"><span class="count" data-target="89">0</span></div>
-            <div class="stat-lbl">BSc GPA</div>
-            <div class="stat-sub">Top 10 / 84 · Excellence</div>
-            <div class="stat-bar"><div class="stat-bar-fill" data-w="89"></div></div>
+        <div class="stat-card reveal show" data-rev-delay="90">
+            <div class="stat-num" data-eid="_stat_num_0"><span class="count" data-target="89">89</span></div>
+            <div class="stat-lbl" data-eid="_stat_lbl_0">BSc GPA</div>
+            <div class="stat-sub" data-eid="_stat_sub_0"><div>@Ben-Gurion University</div>Top 10 / 84 · Excellence</div>
+            <div class="stat-bar"><div class="stat-bar-fill" data-w="89" style="width: 89%;"></div></div>
         </div>
-        <div class="stat-card reveal">
-            <div class="stat-num"><span class="count" data-target="93">0</span></div>
-            <div class="stat-lbl">MSc GPA</div>
-            <div class="stat-sub">Meitar Excellence Program</div>
-            <div class="stat-bar"><div class="stat-bar-fill" data-w="93"></div></div>
+        <div class="stat-card reveal show" data-rev-delay="180">
+            <div class="stat-num" data-eid="_stat_num_1"><span class="count" data-target="93">93</span></div>
+            <div class="stat-lbl" data-eid="_stat_lbl_1">MSc GPA</div>
+            <div class="stat-sub" data-eid="_stat_sub_1"><div>@Ben-Gurion University</div>Accelerated Program "Meitar"</div>
+            <div class="stat-bar"><div class="stat-bar-fill" data-w="93" style="width: 93%;"></div></div>
         </div>
-        <div class="stat-card reveal">
-            <div class="stat-num"><span class="count" data-target="2">0</span></div>
-            <div class="stat-lbl">Publications</div>
-            <div class="stat-sub">NDSS SpaceSec</div>
-            <div class="stat-bar"><div class="stat-bar-fill" data-w="100"></div></div>
+        <div class="stat-card reveal show" data-rev-delay="270">
+            <div class="stat-num" data-eid="_stat_num_2"><span class="count" data-target="2">2</span></div>
+            <div class="stat-lbl" data-eid="_stat_lbl_2">Publications</div>
+            <div class="stat-sub" data-eid="_stat_sub_2">LighTellite[NDSS SpaceSec '26]<div>AegisSat[NDSS SpaceSec '25]</div></div>
+            <div class="stat-bar"><div class="stat-bar-fill" data-w="100" style="width: 100%;"></div></div>
         </div>
-        <div class="stat-card reveal">
-            <div class="stat-num"><span class="count" data-target="3">0</span><span class="sfx">+</span></div>
-            <div class="stat-lbl">Years Experience</div>
-            <div class="stat-sub">Industry &amp; Research</div>
-            <div class="stat-bar"><div class="stat-bar-fill" data-w="60"></div></div>
+        <div class="stat-card reveal show" data-rev-delay="0">
+            <div class="stat-num" data-eid="_stat_num_3"><span class="count" data-target="3">3</span><span class="sfx">+</span></div>
+            <div class="stat-lbl" data-eid="_stat_lbl_3">Years Experience</div>
+            <div class="stat-sub" data-eid="_stat_sub_3">Industry &amp; Research</div>
+            <div class="stat-bar"><div class="stat-bar-fill" data-w="60" style="width: 60%;"></div></div>
         </div>
     </div>
 
-    <div class="exp-grid reveal">
+    <div class="exp-grid reveal show" data-rev-delay="90">
         <div class="exp-card">
             <div class="exp-header">
                 <div>
-                    <div class="exp-role">Data Scientist</div>
-                    <div class="exp-company">Cyber@BGU · Deutsche Telekom</div>
+                    <div class="exp-role" data-eid="_exp_role_0">Data Scientist</div>
+                    <div class="exp-company" data-eid="_exp_company_0">Cyber@BGU · Deutsche Telekom</div>
                 </div>
-                <span class="exp-dates">2023 — 2025</span>
+                <span class="exp-dates" data-eid="_exp_dates_0">2023 — 2025</span>
             </div>
-            <ul class="exp-bullets">
+            <ul class="exp-bullets" data-eid="_exp_bullets_0">
                 <li>Designed LighTellite — RL-based system for energy-aware anomaly detection on CubeSats.</li>
                 <li>Built unsupervised autoencoder models for multivariate time-series anomaly detection.</li>
-                <li>+18% detection accuracy · −22% energy consumption vs. baseline.</li>
+                <li>+18% detection accuracy · −22% energy consumption vs. baselines.</li>
                 <li>Published at NDSS SpaceSec 2026 as first author.</li>
             </ul>
-            <div class="exp-tags">
+            <div class="exp-tags" data-eid="_exp_tags_0">
                 <span class="exp-tag">Python</span><span class="exp-tag">PyTorch</span>
                 <span class="exp-tag">Reinforcement Learning</span><span class="exp-tag">CubeSat</span>
                 <span class="exp-tag">Anomaly Detection</span>
@@ -626,21 +621,21 @@
         <div class="exp-card">
             <div class="exp-header">
                 <div>
-                    <div class="exp-role">Data Engineer &amp; Analyst</div>
-                    <div class="exp-company">BrightSource Energy · CTO Office</div>
+                    <div class="exp-role" data-eid="_exp_role_1">Data Engineer &amp; Analyst [Student]</div>
+                    <div class="exp-company" data-eid="_exp_company_1">BrightSource Energy · CTO</div>
                 </div>
-                <span class="exp-dates">2022 — 2023</span>
+                <span class="exp-dates" data-eid="_exp_dates_1">2022 — 2023</span>
             </div>
-            <ul class="exp-bullets">
-                <li>Owned ETL pipeline component (Bronze–Silver) for data ingestion in AWS.</li>
+            <ul class="exp-bullets" data-eid="_exp_bullets_1">
+                <li>Owned ETL pipeline component (Bronze–Silver-Gold) for data ingestion in AWS.</li>
                 <li>Built and optimized data transfer and monitoring pipelines.</li>
                 <li>Analyzed operational data to generate business insights and research.</li>
-                <li>Delivered under tight timelines with strong self-learning capabilities.</li>
+                <li>Delivered under tight timelines with strong self-learning and team work capabilities.</li><li>Documented and organized company knowledge.</li>
             </ul>
-            <div class="exp-tags">
+            <div class="exp-tags" data-eid="_exp_tags_1">
                 <span class="exp-tag">Python</span><span class="exp-tag">SQL</span>
                 <span class="exp-tag">PySpark</span><span class="exp-tag">AWS</span>
-                <span class="exp-tag">Airflow</span><span class="exp-tag">SQS</span>
+                <span class="exp-tag">Airflow</span><span class="exp-tag">Machine Learning</span>
             </div>
         </div>
     </div>
@@ -648,7 +643,7 @@
 
 <!-- ─── SPAWNING POOL ─── -->
 <section id="spawning-pool">
-    <div class="section-header reveal">
+    <div class="section-header reveal show" data-rev-delay="180">
         <p class="section-tag">// spawning_pool.query_all</p>
         <h2 class="section-title">SPAWNING <em>POOL</em></h2>
         <div class="section-hr"></div>
@@ -656,40 +651,40 @@
 
     <div class="eggs-hatchery">
 
-        <div class="egg reveal" data-id="0">
-            <span class="egg-pub">NDSS 2026</span>
-            <div class="egg-type">Reinforcement Learning</div>
-            <div class="egg-name">LighTellite</div>
-            <div class="egg-brief">RL-based energy-aware anomaly detection for CubeSat systems</div>
+        <div class="egg reveal show" data-id="0" data-rev-delay="270">
+            <span class="egg-pub" data-eid="_egg_pub_0">NDSS 2026</span>
+            <div class="egg-type" data-eid="_egg_type_0">Reinforcement Learning</div>
+            <div class="egg-name" data-eid="_egg_name_0">LighTellite</div>
+            <div class="egg-brief" data-eid="_egg_brief_0">An RL-based model-selection framework for energy-aware anomaly detection on reso…</div>
             <div class="egg-hint">// click to hatch</div>
         </div>
 
-        <div class="egg reveal" data-id="1" data-rev-delay="90">
-            <span class="egg-pub">NDSS 2025</span>
-            <div class="egg-type">Cybersecurity</div>
-            <div class="egg-name">AegisSat</div>
-            <div class="egg-brief">Satellite cybersecurity testbed for reproducible threat simulation</div>
+        <div class="egg reveal show" data-id="1" data-rev-delay="90">
+            <span class="egg-pub" data-eid="_egg_pub_1">NDSS 2025</span>
+            <div class="egg-type" data-eid="_egg_type_1">Cybersecurity</div>
+            <div class="egg-name" data-eid="_egg_name_1">AegisSat</div>
+            <div class="egg-brief" data-eid="_egg_brief_1">A satellite cybersecurity testbed designed to simulate cyber threats against Cub…</div>
             <div class="egg-hint">// click to hatch</div>
         </div>
 
-        <div class="egg reveal" data-id="2" data-rev-delay="180">
-            <div class="egg-type">Deep Learning · NLP</div>
-            <div class="egg-name">MoE-MLoRA</div>
-            <div class="egg-brief">Mixture-of-Experts LoRA for multi-domain CTR prediction</div>
+        <div class="egg reveal show" data-id="2" data-rev-delay="180">
+            <div class="egg-type" data-eid="_egg_type_2">Deep Learning · NLP</div>
+            <div class="egg-name" data-eid="_egg_name_2">MoE-MLoRA</div>
+            <div class="egg-brief" data-eid="_egg_brief_2">A Mixture-of-Experts architecture combined with MLoRA&amp;nbsp;for efficient multi-d…</div>
             <div class="egg-hint">// click to hatch</div>
         </div>
 
-        <div class="egg reveal" data-id="3" data-rev-delay="270">
-            <div class="egg-type">Computer Vision</div>
-            <div class="egg-name">Flicker-of-Hope</div>
-            <div class="egg-brief">Diffusion-based defense against adversarial patch attacks</div>
+        <div class="egg reveal show" data-id="3" data-rev-delay="270">
+            <div class="egg-type" data-eid="_egg_type_3">Computer Vision</div>
+            <div class="egg-name" data-eid="_egg_name_3">Flicker-of-Hope</div>
+            <div class="egg-brief" data-eid="_egg_brief_3">A diffusion-based adversarial defense against adversarial patch attacks on objec…</div>
             <div class="egg-hint">// click to hatch</div>
         </div>
 
-        <div class="egg reveal" data-id="4" data-rev-delay="360">
-            <div class="egg-type">LLM · RAG</div>
-            <div class="egg-name">RAG Research<br>Assistant</div>
-            <div class="egg-brief">RAG over 50K academic abstracts with LanceDB + FastAPI</div>
+        <div class="egg reveal show" data-id="4" data-rev-delay="360">
+            <div class="egg-type" data-eid="_egg_type_4">LLM · RAG</div>
+            <div class="egg-name" data-eid="_egg_name_4">RAG Research Assistant</div>
+            <div class="egg-brief" data-eid="_egg_brief_4">A&amp;nbsp;Retrieval-Augmented Generation (RAG) system built over a corpus of 50,000…</div>
             <div class="egg-hint">// click to hatch</div>
         </div>
 
@@ -697,110 +692,134 @@
 </section>
 
 <!-- ─── EGG MODAL ─── -->
-<div id="egg-modal" role="dialog" aria-modal="true">
+<div id="egg-modal" role="dialog" aria-modal="true" class="">
     <div class="modal-box">
         <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
-        <div id="modal-content"></div>
+        <div id="modal-content">
+        <p class="modal-tag" contenteditable="true">LLM · Data Engineering</p>
+        <h2 class="modal-title" contenteditable="true">RAG Research Assistant</h2>
+        <p class="modal-pub" contenteditable="true">End-to-End Project</p>
+        <div class="modal-divider"></div>
+        <p class="modal-desc" contenteditable="true">A&nbsp;<em>Retrieval-Augmented Generation (RAG)</em> system built over a corpus of <em>50,000 academic paper abstracts</em>. Uses LanceDB for high-performance vector retrieval, served via FastAPI with Docker containerization for fully reproducible deployment.</p>
+        <div class="modal-achievements">
+            <p class="modal-ach-title">// key_achievements</p>
+            
+            <div class="modal-ach-item">
+                <span class="ach-icon">◆</span><span contenteditable="true">Indexes and retrieves across 50K+ academic abstracts</span>
+            </div>
+            <div class="modal-ach-item">
+                <span class="ach-icon">◆</span><span contenteditable="true">LanceDB for fast approximate nearest-neighbor vector search</span>
+            </div>
+            <div class="modal-ach-item">
+                <span class="ach-icon">◆</span><span contenteditable="true">Production-deployed via FastAPI REST API + Docker</span>
+            </div>
+            <div class="modal-ach-item">
+                <span class="ach-icon">◆</span><span contenteditable="true">End-to-end: data ingestion → embedding → retrieval → generation</span>
+            </div>
+        </div>
+        <div class="modal-tech">
+            <p class="modal-tech-title">// tech_stack</p>
+            <div class="modal-tags"><span class="mtag" contenteditable="true">Python</span><span class="mtag" contenteditable="true">LanceDB</span><span class="mtag" contenteditable="true">FastAPI</span><span class="mtag" contenteditable="true">Docker</span><span class="mtag" contenteditable="true">RAG</span><span class="mtag" contenteditable="true">LLMs</span><span class="mtag" contenteditable="true">Vector DB</span><span class="mtag" contenteditable="true">NLP</span></div>
+        </div>
+        <div class="modal-links"><a href="https://github.com/avielbst" class="modal-link" target="_blank" rel="noopener">GitHub ↗</a></div>
+    <button class="admin-btn adm-proj-btn" style="margin-top: 1.2rem;">▶ SAVE PROJECT</button></div>
     </div>
 </div>
 
 <!-- ─── SWARM'S VISION ─── -->
 <section id="swarms-vision">
-    <div class="section-header reveal">
+    <div class="section-header reveal show" data-rev-delay="0">
         <p class="section-tag">// swarm.vision.manifest</p>
         <h2 class="section-title">THE SWARM'S <em>VISION</em></h2>
         <div class="section-hr"></div>
     </div>
 
     <div class="about-grid">
-        <div class="about-bio reveal">
-            <p>I am <strong>Aviel Ben Siman Tov</strong> — a <em>Data Scientist and AI Researcher</em> specializing in reinforcement learning, deep learning, and generative AI. Like the Zerg's relentless adaptation, I build systems that evolve and self-improve under real-world constraints.</p>
-            <p>First author of <em>LighTellite</em> (NDSS SpaceSec 2026) and contributor to <em>AegisSat</em> — spanning satellite cybersecurity to LLM pipelines. MSc from Ben-Gurion University with GPA 93, Meitar Excellence Program for top students.</p>
-            <p>Strong foundation in statistics, ML and logical reasoning. Independent, self-driven, capable of delivering end-to-end ML systems under tight timelines.</p>
+        <div class="about-bio reveal show" data-rev-delay="90">
+            <p data-eid="_about_bio_p_0">I am <strong>Aviel Ben Siman Tov</strong> — a <em>Data Scientist and AI Researcher</em> specializing in reinforcement learning, deep learning, and generative AI.&nbsp;<div>I build systems that evolve and self-improve under real-world constraints.</div></p>
+            <p data-eid="_about_bio_p_1">First author of <em>LighTellite</em> (NDSS SpaceSec 2026) and contributor to <em>AegisSat</em> — spanning satellite cybersecurity to LLM pipelines. MSc from Ben-Gurion University with GPA 93, Meitar Excellence Program for top students.</p>
+            <p data-eid="_about_bio_p_2">Strong foundation in statistics, ML and logical reasoning. Independent, self-driven, capable of delivering end-to-end ML systems under tight timelines.</p>
 
             <div class="timeline">
-                <p class="tl-heading">// evolution_log</p>
+                <p class="tl-heading" data-eid="_about_bio_p_3">// evolution_log</p>
                 <div class="tl-item">
-                    <span class="tl-yr">23–25</span>
-                    <div class="tl-body">
+                    <span class="tl-yr" data-eid="_tl_yr_0">23–25</span>
+                    <div class="tl-body" data-eid="_tl_body_0">
                         <strong>Data Scientist — Cyber@BGU · Deutsche Telekom</strong>
                         <span>RL-based anomaly detection · NDSS SpaceSec 2026 · First Author</span>
                     </div>
                 </div>
                 <div class="tl-item">
-                    <span class="tl-yr">23–25</span>
-                    <div class="tl-body">
+                    <span class="tl-yr" data-eid="_tl_yr_1">23–25</span>
+                    <div class="tl-body" data-eid="_tl_body_1">
                         <strong>MSc Data &amp; Information — AI Specialization</strong>
                         <span>Ben-Gurion University · GPA 93 · Meitar Excellence Program</span>
                     </div>
                 </div>
                 <div class="tl-item">
-                    <span class="tl-yr">22–23</span>
-                    <div class="tl-body">
+                    <span class="tl-yr" data-eid="_tl_yr_2">22–23</span>
+                    <div class="tl-body" data-eid="_tl_body_2">
                         <strong>Data Engineer &amp; Analyst — BrightSource Energy</strong>
-                        <span>ETL pipelines · AWS · CTO Office</span>
-                    </div>
+                        <span>ETL pipelines · AWS · CTO</span></div>
                 </div>
                 <div class="tl-item">
-                    <span class="tl-yr">20–24</span>
-                    <div class="tl-body">
+                    <span class="tl-yr" data-eid="_tl_yr_3">20–24</span>
+                    <div class="tl-body" data-eid="_tl_body_3">
                         <strong>BSc Data Science — Ben-Gurion University</strong>
-                        <span>GPA 89 · Ranked 10 / 84 students</span>
-                    </div>
+                        <span>GPA 89 · Excellence</span></div>
                 </div>
                 <div class="tl-item">
-                    <span class="tl-yr">15–18</span>
-                    <div class="tl-body">
+                    <span class="tl-yr" data-eid="_tl_yr_4">15–18</span>
+                    <div class="tl-body" data-eid="_tl_body_4">
                         <strong>Military Service — Electronic Technician</strong>
-                        <span>Ground-to-air missile systems · Ort Aviation &amp; Space GPA 93</span>
-                    </div>
+                        <span>Ground-to-air missile systems</span></div>
                 </div>
             </div>
         </div>
 
-        <div class="skills-panel reveal">
+        <div class="skills-panel reveal show" data-rev-delay="180">
             <p class="skl-heading">// capabilities.index</p>
 
             <div class="skl-cat">
-                <p class="skl-cat-name">ML &amp; AI CORE</p>
+                <p class="skl-cat-name" data-eid="_skl_cat_name_0">ML &amp; AI CORE</p>
                 <div class="skl-list">
-                    <span class="skl-item">Reinforcement Learning</span>
-                    <span class="skl-item">Deep Learning</span>
-                    <span class="skl-item">Agentic Frameworks</span>
-                    <span class="skl-item">LLMs &amp; RAG</span>
-                    <span class="skl-item">Anomaly Detection</span>
-                    <span class="skl-item">Generative AI</span>
+                    <span class="skl-item" data-eid="_skl_item_0">Reinforcement Learning</span>
+                    <span class="skl-item" data-eid="_skl_item_1">Deep Learning</span>
+                    <span class="skl-item" data-eid="_skl_item_2">Agentic Frameworks</span>
+                    <span class="skl-item" data-eid="_skl_item_3">LLMs &amp; RAG</span>
+                    <span class="skl-item" data-eid="_skl_item_4">Anomaly Detection</span>
+                    <span class="skl-item" data-eid="_skl_item_5">Generative AI</span>
                 </div>
             </div>
 
             <div class="skl-cat">
-                <p class="skl-cat-name">LANGUAGES &amp; FRAMEWORKS</p>
+                <p class="skl-cat-name" data-eid="_skl_cat_name_1">LANGUAGES &amp; FRAMEWORKS</p>
                 <div class="skl-list">
-                    <span class="skl-item">Python</span>
-                    <span class="skl-item">SQL</span>
-                    <span class="skl-item">PyTorch</span>
-                    <span class="skl-item">PySpark</span>
-                    <span class="skl-item">FastAPI</span>
+                    <span class="skl-item" data-eid="_skl_item_6">Python</span>
+                    <span class="skl-item" data-eid="_skl_item_7">SQL</span>
+                    <span class="skl-item" data-eid="_skl_item_8">PyTorch</span>
+                    <span class="skl-item" data-eid="_skl_item_9">PySpark</span>
+                    <span class="skl-item" data-eid="_skl_item_10">FastAPI</span>
                 </div>
             </div>
 
             <div class="skl-cat">
-                <p class="skl-cat-name">INFRASTRUCTURE</p>
+                <p class="skl-cat-name" data-eid="_skl_cat_name_2">INFRASTRUCTURE</p>
                 <div class="skl-list">
-                    <span class="skl-item">AWS (Airflow · SQS)</span>
-                    <span class="skl-item">Docker</span>
-                    <span class="skl-item">LanceDB</span>
-                    <span class="skl-item">Git</span>
+                    <span class="skl-item" data-eid="_skl_item_11">AWS</span>
+                    <span class="skl-item" data-eid="_skl_item_12">Docker</span>
+                    <span class="skl-item" data-eid="_skl_item_13">GitHub</span>
+                    <span class="skl-item" data-eid="_skl_item_14">.</span>
                 </div>
             </div>
 
             <div class="research-box">
                 <p class="res-heading">// publications</p>
-                <div class="res-item">
+                <div class="res-item" data-eid="_res_item_0">
                     <strong>NDSS SpaceSec 2026 · First Author</strong><br>
                     LighTellite: RL-Based Framework for Energy-Efficient Satellite Anomaly Detection
                 </div>
-                <div class="res-item">
+                <div class="res-item" data-eid="_res_item_1">
                     <strong>NDSS SpaceSec 2025 · Contributor</strong><br>
                     AegisSat: A Satellite Cybersecurity Testbed
                 </div>
@@ -1384,5 +1403,14 @@ document.querySelectorAll('section').forEach(s => secObs.observe(s));
 
 }());
 </script>
-</body>
-</html>
+
+
+<div id="admin-bar" style="display: none;">
+      <span class="admin-label">// EDIT MODE ACTIVE</span>
+      <button class="admin-btn" id="ab-save">▶ SAVE</button>
+      <button class="admin-btn warn" id="ab-reset">↺ RESET ALL</button>
+      <button class="admin-btn" id="ab-export">⬇ EXPORT HTML</button>
+      <button class="admin-btn warn" id="ab-exit">✕ EXIT</button>
+      <span style="margin-left:auto;color:var(--text-dim);font-size:.6rem;opacity:.4">
+        triple-click logo to re-enter
+      </span></div></body></html>
